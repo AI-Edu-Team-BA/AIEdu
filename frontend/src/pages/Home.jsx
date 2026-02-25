@@ -1,26 +1,44 @@
+// src/pages/Home.jsx
 import React from "react";
 import Navbar from "../components/Navbar";
 
+
 const Home = () => {
   return (
-    <div style={{ minHeight: "100vh", background: "#f0f4f8" }}>
+    <div className="home-page">
       <Navbar />
 
-      <div style={{ padding: "2rem", maxWidth: "1200px", margin: "0 auto" }}>
-        <h1>Dobrodošao na AIEdu platformu!</h1>
-        <p>
-          Ovdje će kasnije biti tvoji kursevi, AI lekcije, progres, kvizovi...
-        </p>
+      <main className="home-content">
+        <div className="hero-section">
+          <h1>Dobrodošla na AIEdu platformu!</h1>
+          <p className="hero-subtitle">
+            Uči pametno uz pomoć vještačke inteligencije – personalizovane lekcije, kvizovi i napredak u realnom vremenu.
+          </p>
 
-        <div style={{ marginTop: "2rem" }}>
-          <h3>Brze akcije</h3>
-          <ul>
-            <li>→ Započni novi kurs</li>
-            <li>→ Pogledaj preporuke</li>
-            <li>→ Nastavi gdje si stao</li>
-          </ul>
+          <div className="quick-actions">
+            <h3>Brze akcije</h3>
+            <div className="action-cards">
+              <div className="action-card">
+                <span className="icon">🚀</span>
+                <h4>Započni novi kurs</h4>
+                <p>Pronađi kurs koji te zanima i kreni odmah</p>
+              </div>
+
+              <div className="action-card">
+                <span className="icon">⭐</span>
+                <h4>Pogledaj preporuke</h4>
+                <p>AI ti predlaže šta bi trebalo sljedeće učiti</p>
+              </div>
+
+              <div className="action-card">
+                <span className="icon">↪️</span>
+                <h4>Nastavi gdje si stao</h4>
+                <p>Vrati se na lekciju na kojoj si prekinuo/la</p>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+      </main>
     </div>
   );
 };
