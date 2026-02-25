@@ -4,7 +4,6 @@ import * as Yup from "yup";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import FormInput from "../components/FormInput";
-//import App from "../App.css";
 
 const validationSchema = Yup.object({
   email: Yup.string().email("Neispravan email").required("Obavezno polje"),
@@ -22,25 +21,25 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
-  try {
-    console.log("Šaljem login zahtjev...");
-    const res = await axios.post("http://localhost:5000/auth/login", values);
-    
-    console.log("Odgovor od servera:", res.data);
-    
-    localStorage.setItem("token", res.data.token);
-    alert("Login successful!");
-    resetForm();
-    
-    console.log("Navigiram na /home...");
-    navigate("/home", { replace: true });
-  } catch (err) {
-    console.error("Greška pri logovanju:", err);
-    alert("Login failed: " + (err.response?.data?.message || "Nepoznata greška"));
-  } finally {
-    setSubmitting(false);
-  }
-};
+    try {
+      console.log("Šaljem login zahtjev...");
+      const res = await axios.post("http://localhost:5000/auth/login", values);
+
+      console.log("Odgovor od servera:", res.data);
+
+      localStorage.setItem("token", res.data.token);
+      alert("Login successful!");
+      resetForm();
+
+      console.log("Navigiram na /home...");
+      navigate("/home", { replace: true });
+    } catch (err) {
+      console.error("Greška pri logovanju:", err);
+      alert("Login failed: " + (err.response?.data?.error || "Nepoznata greška"));
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   return (
     <div className="login-container">

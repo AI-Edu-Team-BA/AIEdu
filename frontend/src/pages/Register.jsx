@@ -4,7 +4,6 @@ import * as Yup from "yup";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import FormInput from "../components/FormInput";
-//import Apps from "../Apps";
 
 const validationSchema = Yup.object({
   email: Yup.string()
@@ -34,7 +33,7 @@ const Register = () => {
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
       // šaljemo samo potrebna polja (bez confirmPassword)
-      await axios.post("http://localhost:5000/auth/register", {
+      const res = await axios.post("http://localhost:5000/auth/register", {
         email: values.email,
         username: values.username,
         password: values.password,
