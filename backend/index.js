@@ -3,48 +3,36 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(bodyParser.json());
 
-// Privremena "baza" u memoriji (samo za test)
-const users = [];
-
-// Register
+// DEMO MOD: uvijek uspješno – bez baze, bez provjere
 app.post("/auth/register", (req, res) => {
   const { email, username, password } = req.body;
 
-  if (!email || !username || !password) {
-    return res.status(400).json({ error: "Sva polja su obavezna" });
-  }
+  console.log("Registracija pokušaj (demo):", { email, username });
 
-  if (users.find(u => u.email === email)) {
-    return res.status(409).json({ error: "Email već postoji" });
-  }
-
-  users.push({ email, username, password }); // u stvarnosti → hashuj password!
-  console.log("Novi korisnik:", username);
-
+  // Uvijek uspješno
   res.status(201).json({ message: "Registracija uspješna" });
 });
 
-// Login
 app.post("/auth/login", (req, res) => {
   const { email, password } = req.body;
 
-  const user = users.find(u => u.email === email && u.password === password);
+  console.log("Login pokušaj (demo):", { email });
 
-  if (!user) {
-    return res.status(401).json({ error: "Pogrešan email ili lozinka" });
-  }
-
-  const token = "demo-token-" + Date.now() + "-" + user.username;
-  console.log("Uspješan login:", user.username);
-
+  // Uvijek uspješno – generiši token
+  const token = "demo-token-" + Date.now();
   res.json({ message: "Login successful", token });
+});
+
+// Možeš dodati root rutu da vidiš da backend radi
+app.get("/", (req, res) => {
+  res.send("Backend radi! (demo mod)");
 });
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
-});  
+});
